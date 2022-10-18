@@ -67,7 +67,93 @@ void dealloc(Node* head)
 //   function object struct declarations
 // -----------------------------------------------
 
+struct isOdd {
+    bool operator()(int value) {
+        return value % 2 == 1;
+    }
+};
 
+struct isEven {
+    bool operator()(int value) {
+        return value % 2 == 0;
+    }
+};
+
+struct isLessThan {
+    int pivot;
+    isLessThan(int p) : pivot(p) {}
+    bool operator()(int value) {
+        return value < pivot;
+    }
+};
+
+struct isGreaterThan {
+    int pivot;
+    isGreaterThan(int p) : pivot(p) {}
+    bool operator()(int value) {
+        return value > pivot;
+    }
+};
+
+struct isLessThanEqualTo {
+    int pivot;
+    isLessThanEqualTo(int p) : pivot(p) {}
+    bool operator()(int value) {
+        return value <= pivot;
+    }
+};
+
+struct isGreaterThanEqualTo {
+    int pivot;
+    isGreaterThanEqualTo(int p) : pivot(p) {}
+    bool operator()(int value) {
+        return value >= pivot;
+    }
+};
+
+struct isNotEqualTo {
+    int pivot;
+    isNotEqualTo(int p) : pivot(p) {}
+    bool operator()(int value) {
+        return value != pivot;
+    }
+};
+
+struct isDivisibleBy {
+    int divisor;
+    isDivisibleBy(int d) : divisor(d) {}
+    bool operator()(int value) {
+        return value % divisor == 0;
+    }
+};
+
+struct isNotDivisibleBy {
+    int divisor;
+    isNotDivisibleBy(int d) : divisor(d) {}
+    bool operator()(int value) {
+        return value % divisor != 0;
+    }
+};
+
+struct isPrime {
+    bool operator()(int value) {
+        if (value <= 1) return false;
+        for (int i = 2; i < value; i++) {
+            if (value % i == 0) return false;
+        }
+        return true;
+    }
+};
+
+struct isNotPrime {
+    bool operator()(int value) {
+        if (value <= 1) return true;
+        for (int i = 2; i < value; i++) {
+            if (value % i == 0) return true;
+        }
+        return false;
+    }
+};
 
 
 
@@ -86,6 +172,21 @@ int main(int argc, char* argv[])
     print(head);
 
     // Test out your linked list code
+    
+
+
+    // Test llpivot
+    Node* smaller = NULL;
+    Node* larger = NULL;
+    llpivot(head, smaller, larger, 5);
+    cout << "Smaller list: ";
+    print(smaller);
+    cout << "Larger list: ";
+    print(larger);
+    dealloc(smaller);
+    dealloc(larger);
+
+    
 
 
 
